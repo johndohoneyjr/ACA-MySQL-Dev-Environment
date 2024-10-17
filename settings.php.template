@@ -1,0 +1,15 @@
+<?php
+
+$databases['default']['default'] = array (
+  'database' => getenv('DRUPAL_DB_NAME'),
+  'username' => getenv('DRUPAL_DB_USER'),
+  'password' => getenv('DRUPAL_DB_PASSWORD'),
+  'host' => getenv('DRUPAL_DB_HOST'),
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+  'collation' => 'utf8mb4_general_ci',
+  'pdo' => [
+    PDO::MYSQL_ATTR_SSL_CA => getenv('DRUPAL_DB_SSL_CA'),
+  ],
+);

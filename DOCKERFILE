@@ -1,15 +1,25 @@
 FROM drupal:10
 
-# Install additional PHP extensions if needed
+# Install necessary packages for SSL
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set permissions for Drupal files
-RUN chown -R www-data:www-data /var/www/html
+# Copy SSL certificates into the container
+COPY DigiCertGlobalRootCA.crt.pem /etc/ssl/certs/ca-cert.pem
 
-# Mount Azure File Share
-VOLUME ["/var/www/html/sites/default/files"]
+# Set environment variables for Drupal to use SSL
+ENV DRUPAL_DB_SSL_CA=/etc/ssl/certs/ca-cert.pem
+
+# Ensure the permissions are correct
+RUN chmod 644 /etc/ssl/certs/ca-cert.pem
+
+# Copy the settings.php template into the container
+COPY settings.php.template /var/www/html/sites/default/settings.php.template
+
+# Replace placeholders with environment variables and move to the correct location
+RUN envsubst < /var/www/html/sites/default/settings.php.template > /var/www/html/sites/default/settings.php && \
+    rm /var/www/html/sites/default/settings.php.template
+
+# Ensure the permissions are correct for settings.php
+RUN chmod 644 /var/www/html/sites/default/settings.php
