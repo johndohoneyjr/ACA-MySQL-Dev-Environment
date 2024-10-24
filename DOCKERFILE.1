@@ -7,9 +7,3 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd
-
-# Set permissions for Drupal files
-RUN chown -R www-data:www-data /var/www/html
-
-# Mount Azure File Share
-VOLUME ["/var/www/html/sites/default/files"]

@@ -1,4 +1,4 @@
-FROM drupal:10
+FROM docker.io/bitnami/drupal:10.3.6-debian-12-r1
 
 # Install necessary packages for SSL
 RUN apt-get update && apt-get install -y \
@@ -13,13 +13,3 @@ ENV DRUPAL_DB_SSL_CA=/etc/ssl/certs/ca-cert.pem
 
 # Ensure the permissions are correct
 RUN chmod 644 /etc/ssl/certs/ca-cert.pem
-
-# Copy the settings.php template into the container
-COPY settings.php.template /var/www/html/sites/default/settings.php.template
-
-# Replace placeholders with environment variables and move to the correct location
-RUN envsubst < /var/www/html/sites/default/settings.php.template > /var/www/html/sites/default/settings.php && \
-    rm /var/www/html/sites/default/settings.php.template
-
-# Ensure the permissions are correct for settings.php
-RUN chmod 644 /var/www/html/sites/default/settings.php

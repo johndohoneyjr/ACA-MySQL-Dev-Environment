@@ -1,0 +1,15 @@
+{
+  "Name": "MyCustomRole",
+  "IsCustom": true,
+  "Description": "Custom role to create service principals and assign roles",
+  "Actions": [
+    "Microsoft.Authorization/roleAssignments/read",
+    "Microsoft.Authorization/roleAssignments/write",
+    "Microsoft.Authorization/roleAssignments/delete",
+    "Microsoft.Authorization/roleDefinitions/read"
+  ],
+  "NotActions": [],
+  "AssignableScopes": [
+    "/subscriptions/f74853cf-a2a4-43b0-953d-651aaf3bd314"
+  ]
+}

@@ -3,8 +3,8 @@ $tenantId = "<tenant-id>"
 Connect-AzAccount -TenantId $tenantId
 
 # Define variables
-$resourceGroupName = "abc-drupal-rg"
-$serverName = "acacmsmysqlserver" 
+$resourceGroupName = "<RG Name>"
+$serverName = "< Mysql Server Name>" 
 $ipAddresses = @(
     "20.175.131.120", "20.175.131.81", "20.175.131.103", "20.175.131.130",
     "20.116.137.89", "20.116.137.87", "20.116.137.109", "20.116.137.103",

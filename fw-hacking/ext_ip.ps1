@@ -1,5 +1,5 @@
 # Define variables
-$resourceGroupName = "abc-drupal-rg"
+$resourceGroupName = "< RG Name >"
 
 # Get the list of all Container Apps in the resource group
 $containerApps = az containerapp list --resource-group $resourceGroupName --query "[].{name:name}" --output tsv
